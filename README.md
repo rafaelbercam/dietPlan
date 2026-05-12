@@ -4,19 +4,11 @@ Esta aplicação Vue.js foi criada para gerenciar um plano alimentar dinâmico c
 
 ## Publicação no GitHub Pages
 
-### Opção 1: usar pasta `docs` no branch `main`
-1. Ajuste `VITE_BASE_PATH` se o nome do repositório for diferente de `dietPlan`.
-2. Rode:
-   ```bash
-   npm install
-   npm run build:docs
-   ```
-3. Commit e faça push do projeto com a pasta `docs` incluída.
-4. No GitHub, configure Pages para servir a partir de `main` / `docs`.
+O deploy é feito automaticamente via GitHub Actions ao fazer push no branch `main`.
 
-### Opção 2: usar branch `gh-pages`
-- A aplicação já foi preparada com `base` dinâmico no `vite.config.ts`.
-- Se desejar, você pode adicionar um fluxo de deploy automatizado mais tarde.
+1. No GitHub, vá em **Settings → Pages → Source** e selecione **GitHub Actions**.
+2. Faça push para `main` — o workflow `.github/workflows/deploy.yml` faz o build e publica automaticamente.
+3. O site ficará disponível em `https://<usuario>.github.io/dietPlan/`.
 
 ## Scripts úteis
 
