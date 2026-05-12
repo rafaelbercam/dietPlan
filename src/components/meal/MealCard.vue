@@ -32,7 +32,15 @@
           </span>
         </div>
 
-        <div v-if="food.replaceable && food.options" class="mt-4">
+        <div v-if="food.replaceable && food.multiSelect && food.options" class="mt-4">
+          <FoodMultiSelector
+            :mealId="meal.id"
+            :food="food"
+            @toggle="onToggleMultiSelection"
+          />
+        </div>
+
+        <div v-else-if="food.replaceable && food.options" class="mt-4">
           <FoodSelector
             :mealId="meal.id"
             :food="food"
@@ -53,12 +61,17 @@ import { computed } from 'vue'
 import { useMealPlanStore } from '../../stores/mealPlan.store'
 import type { Meal, FoodCategory } from '../../types'
 import FoodSelector from '../food/FoodSelector.vue'
+import FoodMultiSelector from '../food/FoodMultiSelector.vue'
 
 const props = defineProps<{ meal: Meal }>()
 const mealStore = useMealPlanStore()
 
 const completedCount = computed(() => {
-  return props.meal.foods.filter((food) => !food.replaceable || food.selectedOption).length
+  return props.meal.foods.filter((food) => {
+    if (!food.replaceable) return true
+    if (food.multiSelect) return (food.selectedOptions?.length ?? 0) > 0
+    return !!food.selectedOption
+  }).length
 })
 
 const categoryIcon = (category: FoodCategory) => {
@@ -128,5 +141,9 @@ const categoryLabel = (category: FoodCategory) => {
 
 function onChangeSelection(payload: { foodId: string; optionId: string }) {
   mealStore.updateFoodSelection(props.meal.id, payload.foodId, payload.optionId)
+}
+
+function onToggleMultiSelection(payload: { foodId: string; optionId: string }) {
+  mealStore.toggleFoodMultiSelection(props.meal.id, payload.foodId, payload.optionId)
 }
 </script>

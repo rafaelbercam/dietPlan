@@ -74,7 +74,8 @@ export const defaultMeals: Meal[] = [
         amount: 'Meio prato (pelo menos 2 variedades)',
         category: 'vegetable',
         replaceable: true,
-        selectedOption: vegetables[0],
+        multiSelect: true,
+        selectedOptions: [vegetables[0], vegetables[17]],
         options: vegetables
       },
       {
@@ -86,11 +87,12 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'carb-lunch',
-        name: 'Arroz e/ou outro carboidrato',
-        amount: '8 colheres de sopa',
+        name: 'Carboidrato',
+        amount: '8 colheres de sopa (somados)',
         category: 'carb',
         replaceable: true,
-        selectedOption: carbs[0],
+        multiSelect: true,
+        selectedOptions: [carbs[0]],
         options: carbs
       },
       {
@@ -186,10 +188,11 @@ export const defaultMeals: Meal[] = [
       {
         id: 'vegetables-dinner',
         name: 'Vegetais crus ou cozidos',
-        amount: 'Meio prato',
+        amount: 'Meio prato (pelo menos 2 variedades)',
         category: 'vegetable',
         replaceable: true,
-        selectedOption: vegetables[17],
+        multiSelect: true,
+        selectedOptions: [vegetables[17], vegetables[18]],
         options: vegetables
       },
       {
@@ -201,11 +204,12 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'carb-dinner',
-        name: 'Arroz e/ou outro carboidrato',
-        amount: '6 colheres de sopa',
+        name: 'Carboidrato',
+        amount: '6 colheres de sopa (somados)',
         category: 'carb',
         replaceable: true,
-        selectedOption: carbs[0],
+        multiSelect: true,
+        selectedOptions: [carbs[0]],
         options: carbs
       },
       {
@@ -258,7 +262,8 @@ export const defaultMeals: Meal[] = [
         amount: 'À vontade',
         category: 'vegetable',
         replaceable: true,
-        selectedOption: vegetables[0],
+        multiSelect: true,
+        selectedOptions: [vegetables[0], vegetables[9]],
         options: vegetables
       },
       {

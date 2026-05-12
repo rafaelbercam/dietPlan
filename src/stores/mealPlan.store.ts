@@ -39,6 +39,28 @@ export const useMealPlanStore = defineStore('meal-plan', () => {
     food.selectedOption = nextOption
   }
 
+  function toggleFoodMultiSelection(mealId: string, foodId: string, optionId: string) {
+    const meal = meals.value.find((item) => item.id === mealId)
+    if (!meal) return
+
+    const food = meal.foods.find((item) => item.id === foodId)
+    if (!food || !food.options) return
+
+    const option = food.options.find((o) => o.id === optionId)
+    if (!option) return
+
+    if (!food.selectedOptions) {
+      food.selectedOptions = []
+    }
+
+    const idx = food.selectedOptions.findIndex((o) => o.id === optionId)
+    if (idx !== -1) {
+      food.selectedOptions.splice(idx, 1)
+    } else {
+      food.selectedOptions.push(option)
+    }
+  }
+
   function getSelectedOption(mealId: string, foodId: string): FoodOption | undefined {
     const meal = meals.value.find((item) => item.id === mealId)
     const food = meal?.foods.find((item) => item.id === foodId)
@@ -73,6 +95,7 @@ export const useMealPlanStore = defineStore('meal-plan', () => {
     inactivePeriods,
     upcomingPeriods,
     updateFoodSelection,
+    toggleFoodMultiSelection,
     getSelectedOption,
     savePeriod,
     deletePeriod,

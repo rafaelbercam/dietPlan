@@ -41,7 +41,11 @@ const selectedReplacements = computed(() => {
   return props.meals.reduce((total, meal) => {
     return (
       total +
-      meal.foods.filter((food) => food.replaceable && food.selectedOption).length
+      meal.foods.filter((food) => {
+        if (!food.replaceable) return false
+        if (food.multiSelect) return (food.selectedOptions?.length ?? 0) > 0
+        return !!food.selectedOption
+      }).length
     )
   }, 0)
 })
