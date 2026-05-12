@@ -29,3 +29,11 @@ export interface Meal {
   title: string
   foods: FoodItem[]
 }
+
+export interface MealPlanPeriod {
+  id: string
+  label: string
+  startDate: string
+  endDate: string
+  meals: Meal[]
+}

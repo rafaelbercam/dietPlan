@@ -1,6 +1,8 @@
 import type { Meal } from '../types'
 import { fruits } from './fruits'
 import { meats } from './meats'
+import { vegetables } from './vegetables'
+import { carbs } from './carbs'
 
 export const defaultMeals: Meal[] = [
   {
@@ -71,7 +73,9 @@ export const defaultMeals: Meal[] = [
         name: 'Vegetais crus ou cozidos',
         amount: 'Meio prato (pelo menos 2 variedades)',
         category: 'vegetable',
-        replaceable: false
+        replaceable: true,
+        selectedOption: vegetables[0],
+        options: vegetables
       },
       {
         id: 'olive-oil',
@@ -85,7 +89,9 @@ export const defaultMeals: Meal[] = [
         name: 'Arroz e/ou outro carboidrato',
         amount: '8 colheres de sopa',
         category: 'carb',
-        replaceable: false
+        replaceable: true,
+        selectedOption: carbs[0],
+        options: carbs
       },
       {
         id: 'beans',
@@ -182,7 +188,9 @@ export const defaultMeals: Meal[] = [
         name: 'Vegetais crus ou cozidos',
         amount: 'Meio prato',
         category: 'vegetable',
-        replaceable: false
+        replaceable: true,
+        selectedOption: vegetables[17],
+        options: vegetables
       },
       {
         id: 'olive-oil-dinner',
@@ -196,7 +204,9 @@ export const defaultMeals: Meal[] = [
         name: 'Arroz e/ou outro carboidrato',
         amount: '6 colheres de sopa',
         category: 'carb',
-        replaceable: false
+        replaceable: true,
+        selectedOption: carbs[0],
+        options: carbs
       },
       {
         id: 'beans-dinner',
@@ -247,7 +257,9 @@ export const defaultMeals: Meal[] = [
         name: 'Vegetais crus',
         amount: 'À vontade',
         category: 'vegetable',
-        replaceable: false
+        replaceable: true,
+        selectedOption: vegetables[0],
+        options: vegetables
       },
       {
         id: 'dessert-dinner2',
