@@ -45,7 +45,7 @@
               <span class="h-1.5 w-1.5 rounded-full bg-slate-300"></span>
               <span>{{ food.name }}</span>
               <span class="text-slate-400">—</span>
-              <span class="text-slate-500">{{ food.selectedOption ? food.selectedOption.name : food.amount }}</span>
+              <span class="text-slate-500">{{ foodDisplayValue(food) }}</span>
             </li>
           </ul>
         </div>
@@ -56,7 +56,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { MealPlanPeriod } from '../../types'
+import type { MealPlanPeriod, FoodItem } from '../../types'
 
 const props = defineProps<{
   period: MealPlanPeriod
@@ -104,6 +104,14 @@ const statusLabel = computed(() => ({
   inactive: 'Inativo',
   upcoming: 'Futuro'
 }[props.status]))
+
+function foodDisplayValue(food: FoodItem): string {
+  if (food.multiSelect && food.selectedOptions?.length) {
+    return food.selectedOptions.map((o) => o.name).join(', ')
+  }
+  if (food.selectedOption) return food.selectedOption.name
+  return food.amount
+}
 
 function formatDate(iso: string) {
   const [y, m, d] = iso.split('-')

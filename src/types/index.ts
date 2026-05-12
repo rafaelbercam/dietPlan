@@ -19,7 +19,9 @@ export interface FoodItem {
   amount: string
   category: FoodCategory
   replaceable: boolean
+  multiSelect?: boolean
   selectedOption?: FoodOption
+  selectedOptions?: FoodOption[]
   options?: FoodOption[]
 }
 
