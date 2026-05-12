@@ -39,3 +39,9 @@ export interface MealPlanPeriod {
   endDate: string
   meals: Meal[]
 }
+
+export interface ConsultInfo {
+  nutritionist: string
+  lastConsultDate: string
+  expirationDays: number
+}

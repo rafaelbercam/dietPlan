@@ -1,11 +1,12 @@
 import { computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { Meal, FoodOption, MealPlanPeriod } from '../types'
+import type { Meal, FoodOption, MealPlanPeriod, ConsultInfo } from '../types'
 import { useLocalStorage } from '../composables/useLocalStorage'
 import { getDefaultMealPlan } from '../services/mealPlanService'
 
 const STORAGE_KEY = 'meal-plan-state'
 const PERIODS_KEY = 'meal-plan-periods'
+const CONSULT_KEY = 'meal-plan-consult'
 const VERSION_KEY = 'meal-plan-version'
 const CURRENT_VERSION = 2
 
@@ -47,6 +48,20 @@ function migrateMeals(stored: Meal[]): Meal[] {
 export const useMealPlanStore = defineStore('meal-plan', () => {
   const meals = useLocalStorage<Meal[]>(STORAGE_KEY, getDefaultMealPlan())
   const savedPeriods = useLocalStorage<MealPlanPeriod[]>(PERIODS_KEY, [])
+  const consultInfo = useLocalStorage<ConsultInfo>(CONSULT_KEY, {
+    nutritionist: 'Silvia Penna',
+    lastConsultDate: '2026-04-28',
+    expirationDays: 40
+  })
+
+  const consultExpiration = computed(() => {
+    const last = new Date(consultInfo.value.lastConsultDate)
+    const expDate = new Date(last.getTime() + consultInfo.value.expirationDays * 86400000)
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const diff = Math.ceil((expDate.getTime() - today.getTime()) / 86400000)
+    return { expirationDate: expDate, daysRemaining: diff, expired: diff < 0 }
+  })
 
   const storedVersion = typeof window !== 'undefined'
     ? Number(window.localStorage.getItem(VERSION_KEY) || '0')
@@ -136,9 +151,15 @@ export const useMealPlanStore = defineStore('meal-plan', () => {
     meals.value = getDefaultMealPlan()
   }
 
+  function updateConsultInfo(info: ConsultInfo) {
+    consultInfo.value = info
+  }
+
   return {
     meals,
     savedPeriods,
+    consultInfo,
+    consultExpiration,
     activePeriods,
     inactivePeriods,
     upcomingPeriods,
@@ -147,6 +168,7 @@ export const useMealPlanStore = defineStore('meal-plan', () => {
     getSelectedOption,
     savePeriod,
     deletePeriod,
-    resetToDefaults
+    resetToDefaults,
+    updateConsultInfo
   }
 })
