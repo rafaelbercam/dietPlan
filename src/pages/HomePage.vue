@@ -31,9 +31,25 @@
           </div>
         </div>
 
-        <div class="flex items-center justify-center lg:justify-end">
+        <div class="flex flex-col items-center gap-4 lg:items-end">
           <div class="w-full max-w-md rounded-[2rem] border border-slate-200 bg-white p-6 shadow-lg">
             <SummaryCard :meals="meals" />
+          </div>
+          <div class="flex w-full max-w-md gap-3">
+            <button
+              class="flex flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700"
+              @click="showSaveModal = true"
+            >
+              <span class="material-symbols-outlined" style="font-size: 18px;">bookmark_add</span>
+              Salvar Cardápio
+            </button>
+            <button
+              class="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-600 shadow-sm transition hover:bg-slate-50"
+              @click="onReset"
+            >
+              <span class="material-symbols-outlined" style="font-size: 18px;">restart_alt</span>
+              Resetar
+            </button>
           </div>
         </div>
       </div>
@@ -46,22 +62,40 @@
         :meal="meal"
       />
     </section>
+
+    <SavePlanModal
+      :open="showSaveModal"
+      @close="showSaveModal = false"
+      @save="onSavePeriod"
+    />
   </main>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useMealPlanStore } from '../stores/mealPlan.store'
 import { storeToRefs } from 'pinia'
 import MealCard from '../components/meal/MealCard.vue'
 import SummaryCard from '../components/shared/SummaryCard.vue'
+import SavePlanModal from '../components/period/SavePlanModal.vue'
 
 const mealPlan = useMealPlanStore()
 const { meals } = storeToRefs(mealPlan)
+
+const showSaveModal = ref(false)
 
 const availableReplacements = computed(() => {
   return meals.value.reduce((total, meal) => {
     return total + meal.foods.filter((food) => food.replaceable && food.options?.length).length
   }, 0)
 })
+
+function onSavePeriod(payload: { label: string; startDate: string; endDate: string }) {
+  mealPlan.savePeriod(payload.label, payload.startDate, payload.endDate)
+  showSaveModal.value = false
+}
+
+function onReset() {
+  mealPlan.resetToDefaults()
+}
 </script>
