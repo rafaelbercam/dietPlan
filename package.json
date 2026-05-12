@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:docs": "VITE_BASE_PATH=/dietPlan/ tsc && vite build --outDir docs",
+    "build:docs": "tsc && VITE_BASE_PATH=/dietPlan/ vite build --outDir docs",
     "preview": "vite preview"
   },
   "dependencies": {
