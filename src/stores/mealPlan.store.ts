@@ -8,7 +8,7 @@ const STORAGE_KEY = 'meal-plan-state'
 const PERIODS_KEY = 'meal-plan-periods'
 const CONSULT_KEY = 'meal-plan-consult'
 const VERSION_KEY = 'meal-plan-version'
-const CURRENT_VERSION = 2
+const CURRENT_VERSION = 3
 
 function migrateMeals(stored: Meal[]): Meal[] {
   const defaults = getDefaultMealPlan()
@@ -20,6 +20,11 @@ function migrateMeals(stored: Meal[]): Meal[] {
       continue
     }
 
+    const removedIds = storedMeal.foods
+      .filter((f) => !defaultMeal.foods.some((df) => df.id === f.id))
+      .map((f) => f.id)
+    storedMeal.foods = storedMeal.foods.filter((f) => !removedIds.includes(f.id))
+
     for (const defaultFood of defaultMeal.foods) {
       const storedFood = storedMeal.foods.find((f) => f.id === defaultFood.id)
       if (!storedFood) {
@@ -27,17 +32,30 @@ function migrateMeals(stored: Meal[]): Meal[] {
         continue
       }
 
+      storedFood.category = defaultFood.category
+      storedFood.name = defaultFood.name
+      storedFood.amount = defaultFood.amount
+
       if (defaultFood.multiSelect && !storedFood.multiSelect) {
         storedFood.multiSelect = true
         storedFood.options = defaultFood.options
         storedFood.selectedOptions = defaultFood.selectedOptions
-        storedFood.name = defaultFood.name
-        storedFood.amount = defaultFood.amount
         delete storedFood.selectedOption
+      }
+
+      if (defaultFood.replaceable !== storedFood.replaceable) {
+        storedFood.replaceable = defaultFood.replaceable
+        if (defaultFood.replaceable && defaultFood.options) {
+          storedFood.options = defaultFood.options
+          if (defaultFood.selectedOption) storedFood.selectedOption = defaultFood.selectedOption
+          if (defaultFood.selectedOptions) storedFood.selectedOptions = defaultFood.selectedOptions
+        }
       }
 
       if (defaultFood.options && !storedFood.options) {
         storedFood.options = defaultFood.options
+        if (defaultFood.selectedOption) storedFood.selectedOption = defaultFood.selectedOption
+        if (defaultFood.selectedOptions) storedFood.selectedOptions = defaultFood.selectedOptions
       }
     }
   }

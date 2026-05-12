@@ -3,6 +3,7 @@ import { fruits } from './fruits'
 import { meats } from './meats'
 import { vegetables } from './vegetables'
 import { carbs } from './carbs'
+import { desserts } from './desserts'
 
 export const defaultMeals: Meal[] = [
   {
@@ -28,7 +29,7 @@ export const defaultMeals: Meal[] = [
         id: 'cheese',
         name: 'Queijo minas',
         amount: '2 fatias (40g)',
-        category: 'supplement',
+        category: 'dairy',
         replaceable: false
       },
       {
@@ -58,7 +59,7 @@ export const defaultMeals: Meal[] = [
         id: 'milk-powder',
         name: 'Leite em pó',
         amount: '2 colheres de sopa',
-        category: 'drink',
+        category: 'dairy',
         replaceable: false
       }
     ]
@@ -87,20 +88,13 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'carb-lunch',
-        name: 'Carboidrato',
-        amount: '8 colheres de sopa (somados)',
+        name: 'Carboidratos',
+        amount: 'Arroz 8 col. sopa + Feijão 8 col. sopa (somados)',
         category: 'carb',
         replaceable: true,
         multiSelect: true,
-        selectedOptions: [carbs[0]],
+        selectedOptions: [carbs[0], carbs[1]],
         options: carbs
-      },
-      {
-        id: 'beans',
-        name: 'Feijão',
-        amount: '8 colheres de sopa',
-        category: 'carb',
-        replaceable: false
       },
       {
         id: 'meat-lunch',
@@ -122,7 +116,7 @@ export const defaultMeals: Meal[] = [
         id: 'whole-milk',
         name: 'Leite integral',
         amount: '200ml',
-        category: 'drink',
+        category: 'dairy',
         replaceable: false
       },
       {
@@ -166,7 +160,7 @@ export const defaultMeals: Meal[] = [
         id: 'mozzarella',
         name: 'Mussarela',
         amount: '1 fatia',
-        category: 'supplement',
+        category: 'dairy',
         replaceable: false
       },
       {
@@ -204,20 +198,13 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'carb-dinner',
-        name: 'Carboidrato',
-        amount: '6 colheres de sopa (somados)',
+        name: 'Carboidratos',
+        amount: 'Arroz 6 col. sopa + Feijão 6 col. sopa (somados)',
         category: 'carb',
         replaceable: true,
         multiSelect: true,
-        selectedOptions: [carbs[0]],
+        selectedOptions: [carbs[0], carbs[1]],
         options: carbs
-      },
-      {
-        id: 'beans-dinner',
-        name: 'Feijão',
-        amount: '6 colheres de sopa',
-        category: 'carb',
-        replaceable: false
       },
       {
         id: 'meat-dinner',
@@ -231,9 +218,11 @@ export const defaultMeals: Meal[] = [
       {
         id: 'dessert-dinner',
         name: 'Sobremesa',
-        amount: 'Doce de leite 1 col. sopa (ou 1 paçoquinha)',
+        amount: '1 porção',
         category: 'dessert',
-        replaceable: false
+        replaceable: true,
+        selectedOption: desserts[0],
+        options: desserts
       }
     ]
   },
@@ -251,10 +240,12 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'protein-dinner2',
-        name: 'Frango desfiado, carne moída ou atum',
+        name: 'Proteína',
         amount: '6 colheres de sopa',
         category: 'meat',
-        replaceable: false
+        replaceable: true,
+        selectedOption: meats[11],
+        options: meats
       },
       {
         id: 'vegetables-dinner2',
@@ -269,9 +260,11 @@ export const defaultMeals: Meal[] = [
       {
         id: 'dessert-dinner2',
         name: 'Sobremesa',
-        amount: 'Doce de leite 1 col. sopa (ou 1 paçoquinha)',
+        amount: '1 porção',
         category: 'dessert',
-        replaceable: false
+        replaceable: true,
+        selectedOption: desserts[0],
+        options: desserts
       }
     ]
   }

@@ -2,6 +2,7 @@ import type { FoodOption } from '../types'
 
 export const carbs: FoodOption[] = [
   { id: 'arroz', name: 'Arroz', amount: 'Conforme plano' },
+  { id: 'feijao', name: 'Feijão', amount: 'Conforme plano' },
   { id: 'batata-doce', name: 'Batata doce', amount: 'Conforme plano' },
   { id: 'batata-inglesa', name: 'Batata inglesa', amount: 'Conforme plano' },
   { id: 'baroa', name: 'Baroa (mandioquinha)', amount: 'Conforme plano' },
