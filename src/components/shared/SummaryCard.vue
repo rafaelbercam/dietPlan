@@ -1,8 +1,8 @@
 <template>
   <div class="rounded-[2rem] bg-white p-5 shadow-sm ring-1 ring-slate-200">
     <div class="flex items-center gap-4">
-      <div class="grid h-14 w-14 place-items-center rounded-3xl bg-emerald-100 text-emerald-800 shadow-sm">
-        <span class="text-2xl">🥗</span>
+      <div class="grid h-14 w-14 place-items-center rounded-3xl bg-emerald-100 shadow-sm">
+        <span class="material-symbols-outlined text-emerald-800" style="font-size: 28px;">monitoring</span>
       </div>
       <div>
         <p class="text-sm uppercase tracking-[0.2em] text-slate-500">Resumo diário</p>

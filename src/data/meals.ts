@@ -25,14 +25,14 @@ export const defaultMeals: Meal[] = [
       {
         id: 'cheese',
         name: 'Queijo minas',
-        amount: '40g',
+        amount: '2 fatias (40g)',
         category: 'supplement',
         replaceable: false
       },
       {
         id: 'creatine',
         name: 'Creatina',
-        amount: '5g',
+        amount: '1 medida (6g)',
         category: 'supplement',
         replaceable: false
       }
@@ -49,13 +49,13 @@ export const defaultMeals: Meal[] = [
         amount: '1 porção',
         category: 'fruit',
         replaceable: true,
-        selectedOption: fruits[0],
+        selectedOption: fruits[7],
         options: fruits
       },
       {
         id: 'milk-powder',
         name: 'Leite em pó',
-        amount: '200ml',
+        amount: '2 colheres de sopa',
         category: 'drink',
         replaceable: false
       }
@@ -68,29 +68,29 @@ export const defaultMeals: Meal[] = [
     foods: [
       {
         id: 'vegetables',
-        name: 'Vegetais',
-        amount: '1 xícara',
+        name: 'Vegetais crus ou cozidos',
+        amount: 'Meio prato (pelo menos 2 variedades)',
         category: 'vegetable',
         replaceable: false
       },
       {
         id: 'olive-oil',
-        name: 'Azeite',
-        amount: '1 colher de sopa',
+        name: 'Azeite extra virgem',
+        amount: '1 colher de sobremesa',
         category: 'supplement',
         replaceable: false
       },
       {
         id: 'carb-lunch',
-        name: 'Carboidrato',
-        amount: '1 porção',
+        name: 'Arroz e/ou outro carboidrato',
+        amount: '8 colheres de sopa',
         category: 'carb',
         replaceable: false
       },
       {
         id: 'beans',
         name: 'Feijão',
-        amount: '1 concha',
+        amount: '8 colheres de sopa',
         category: 'carb',
         replaceable: false
       },
@@ -100,7 +100,7 @@ export const defaultMeals: Meal[] = [
         amount: '1 porção',
         category: 'meat',
         replaceable: true,
-        selectedOption: meats[0],
+        selectedOption: meats[11],
         options: meats
       }
     ]
@@ -119,15 +119,15 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'whey',
-        name: 'Whey protein',
-        amount: '1 scoop',
+        name: 'Whey Protein',
+        amount: '30g (1 medida)',
         category: 'supplement',
         replaceable: false
       },
       {
         id: 'oat-bran',
         name: 'Farelo de aveia',
-        amount: '2 colheres de sopa',
+        amount: '1 colher de sopa',
         category: 'carb',
         replaceable: false
       },
@@ -137,7 +137,7 @@ export const defaultMeals: Meal[] = [
         amount: '1 porção',
         category: 'fruit',
         replaceable: true,
-        selectedOption: fruits[1],
+        selectedOption: fruits[26],
         options: fruits
       }
     ]
@@ -149,15 +149,15 @@ export const defaultMeals: Meal[] = [
     foods: [
       {
         id: 'bread-snack',
-        name: 'Pão',
-        amount: '1 unidade',
+        name: 'Pão francês',
+        amount: '½ unidade (ou 1 fatia de pão australiano)',
         category: 'carb',
         replaceable: false
       },
       {
         id: 'mozzarella',
         name: 'Mussarela',
-        amount: '40g',
+        amount: '1 fatia',
         category: 'supplement',
         replaceable: false
       },
@@ -167,45 +167,94 @@ export const defaultMeals: Meal[] = [
         amount: '1 porção',
         category: 'fruit',
         replaceable: true,
-        selectedOption: fruits[2],
+        selectedOption: fruits[24],
         options: fruits
       }
     ]
   },
   {
-    id: 'meal-dinner',
+    id: 'meal-dinner-option1',
     time: '19:30',
-    title: 'Jantar',
+    title: 'Jantar — Opção 1',
     foods: [
       {
         id: 'vegetables-dinner',
-        name: 'Vegetais',
-        amount: '1 xícara',
+        name: 'Vegetais crus ou cozidos',
+        amount: 'Meio prato',
         category: 'vegetable',
         replaceable: false
       },
       {
+        id: 'olive-oil-dinner',
+        name: 'Azeite extra virgem',
+        amount: '1 colher de sobremesa',
+        category: 'supplement',
+        replaceable: false
+      },
+      {
         id: 'carb-dinner',
-        name: 'Carboidrato',
-        amount: '1 porção',
+        name: 'Arroz e/ou outro carboidrato',
+        amount: '6 colheres de sopa',
         category: 'carb',
         replaceable: false
       },
       {
         id: 'beans-dinner',
         name: 'Feijão',
-        amount: '1 concha',
+        amount: '6 colheres de sopa',
         category: 'carb',
         replaceable: false
       },
       {
         id: 'meat-dinner',
-        name: 'Carne',
+        name: 'Carne magra',
         amount: '1 porção',
         category: 'meat',
         replaceable: true,
-        selectedOption: meats[1],
+        selectedOption: meats[3],
         options: meats
+      },
+      {
+        id: 'dessert-dinner',
+        name: 'Sobremesa',
+        amount: 'Doce de leite 1 col. sopa (ou 1 paçoquinha)',
+        category: 'dessert',
+        replaceable: false
+      }
+    ]
+  },
+  {
+    id: 'meal-dinner-option2',
+    time: '19:30',
+    title: 'Jantar — Opção 2',
+    foods: [
+      {
+        id: 'rap10',
+        name: 'Rap 10',
+        amount: '2 unidades',
+        category: 'carb',
+        replaceable: false
+      },
+      {
+        id: 'protein-dinner2',
+        name: 'Frango desfiado, carne moída ou atum',
+        amount: '6 colheres de sopa',
+        category: 'meat',
+        replaceable: false
+      },
+      {
+        id: 'vegetables-dinner2',
+        name: 'Vegetais crus',
+        amount: 'À vontade',
+        category: 'vegetable',
+        replaceable: false
+      },
+      {
+        id: 'dessert-dinner2',
+        name: 'Sobremesa',
+        amount: 'Doce de leite 1 col. sopa (ou 1 paçoquinha)',
+        category: 'dessert',
+        replaceable: false
       }
     ]
   }
