@@ -8,7 +8,7 @@ const STORAGE_KEY = 'meal-plan-state'
 const PERIODS_KEY = 'meal-plan-periods'
 const CONSULT_KEY = 'meal-plan-consult'
 const VERSION_KEY = 'meal-plan-version'
-const CURRENT_VERSION = 3
+const CURRENT_VERSION = 4
 
 function migrateMeals(stored: Meal[]): Meal[] {
   const defaults = getDefaultMealPlan()
@@ -35,27 +35,29 @@ function migrateMeals(stored: Meal[]): Meal[] {
       storedFood.category = defaultFood.category
       storedFood.name = defaultFood.name
       storedFood.amount = defaultFood.amount
+      storedFood.replaceable = defaultFood.replaceable
 
-      if (defaultFood.multiSelect && !storedFood.multiSelect) {
+      if (defaultFood.options) {
+        storedFood.options = defaultFood.options
+      }
+
+      if (defaultFood.multiSelect) {
         storedFood.multiSelect = true
-        storedFood.options = defaultFood.options
-        storedFood.selectedOptions = defaultFood.selectedOptions
         delete storedFood.selectedOption
-      }
-
-      if (defaultFood.replaceable !== storedFood.replaceable) {
-        storedFood.replaceable = defaultFood.replaceable
-        if (defaultFood.replaceable && defaultFood.options) {
-          storedFood.options = defaultFood.options
-          if (defaultFood.selectedOption) storedFood.selectedOption = defaultFood.selectedOption
-          if (defaultFood.selectedOptions) storedFood.selectedOptions = defaultFood.selectedOptions
+        if (!storedFood.selectedOptions || storedFood.selectedOptions.length === 0) {
+          storedFood.selectedOptions = defaultFood.selectedOptions
+        } else {
+          storedFood.selectedOptions = storedFood.selectedOptions.filter(
+            (so) => defaultFood.options!.some((o) => o.id === so.id)
+          )
+          if (storedFood.selectedOptions.length === 0) {
+            storedFood.selectedOptions = defaultFood.selectedOptions
+          }
         }
-      }
-
-      if (defaultFood.options && !storedFood.options) {
-        storedFood.options = defaultFood.options
-        if (defaultFood.selectedOption) storedFood.selectedOption = defaultFood.selectedOption
-        if (defaultFood.selectedOptions) storedFood.selectedOptions = defaultFood.selectedOptions
+      } else {
+        if (defaultFood.replaceable && defaultFood.options && !storedFood.selectedOption) {
+          storedFood.selectedOption = defaultFood.selectedOption
+        }
       }
     }
   }
