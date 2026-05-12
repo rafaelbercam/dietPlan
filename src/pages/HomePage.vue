@@ -13,12 +13,18 @@
           </div>
           <div class="grid gap-3 sm:grid-cols-2">
             <div class="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Refeições</p>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-emerald-600" style="font-size: 20px;">restaurant_menu</span>
+                <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Refeições</p>
+              </div>
               <p class="mt-3 text-2xl font-semibold text-slate-950">{{ meals.length }}</p>
               <p class="mt-2 text-sm text-slate-600">Cards fáceis para revisar e alterar cada refeição.</p>
             </div>
             <div class="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
-              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Opções de substituição</p>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-emerald-600" style="font-size: 20px;">swap_horiz</span>
+                <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Opções de substituição</p>
+              </div>
               <p class="mt-3 text-2xl font-semibold text-slate-950">{{ availableReplacements }}</p>
               <p class="mt-2 text-sm text-slate-600">Escolhas dinâmicas por categoria para manter a equivalência.</p>
             </div>
@@ -44,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useMealPlanStore } from '../stores/mealPlan.store'
 import { storeToRefs } from 'pinia'
 import MealCard from '../components/meal/MealCard.vue'
@@ -51,4 +58,10 @@ import SummaryCard from '../components/shared/SummaryCard.vue'
 
 const mealPlan = useMealPlanStore()
 const { meals } = storeToRefs(mealPlan)
+
+const availableReplacements = computed(() => {
+  return meals.value.reduce((total, meal) => {
+    return total + meal.foods.filter((food) => food.replaceable && food.options?.length).length
+  }, 0)
+})
 </script>
