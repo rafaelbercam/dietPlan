@@ -6,10 +6,58 @@ import { getDefaultMealPlan } from '../services/mealPlanService'
 
 const STORAGE_KEY = 'meal-plan-state'
 const PERIODS_KEY = 'meal-plan-periods'
+const VERSION_KEY = 'meal-plan-version'
+const CURRENT_VERSION = 2
+
+function migrateMeals(stored: Meal[]): Meal[] {
+  const defaults = getDefaultMealPlan()
+
+  for (const defaultMeal of defaults) {
+    const storedMeal = stored.find((m) => m.id === defaultMeal.id)
+    if (!storedMeal) {
+      stored.push(defaultMeal)
+      continue
+    }
+
+    for (const defaultFood of defaultMeal.foods) {
+      const storedFood = storedMeal.foods.find((f) => f.id === defaultFood.id)
+      if (!storedFood) {
+        storedMeal.foods.push(defaultFood)
+        continue
+      }
+
+      if (defaultFood.multiSelect && !storedFood.multiSelect) {
+        storedFood.multiSelect = true
+        storedFood.options = defaultFood.options
+        storedFood.selectedOptions = defaultFood.selectedOptions
+        storedFood.name = defaultFood.name
+        storedFood.amount = defaultFood.amount
+        delete storedFood.selectedOption
+      }
+
+      if (defaultFood.options && !storedFood.options) {
+        storedFood.options = defaultFood.options
+      }
+    }
+  }
+
+  return stored
+}
 
 export const useMealPlanStore = defineStore('meal-plan', () => {
   const meals = useLocalStorage<Meal[]>(STORAGE_KEY, getDefaultMealPlan())
   const savedPeriods = useLocalStorage<MealPlanPeriod[]>(PERIODS_KEY, [])
+
+  const storedVersion = typeof window !== 'undefined'
+    ? Number(window.localStorage.getItem(VERSION_KEY) || '0')
+    : CURRENT_VERSION
+
+  if (storedVersion < CURRENT_VERSION) {
+    meals.value = migrateMeals(meals.value)
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(VERSION_KEY, String(CURRENT_VERSION))
+    }
+  }
 
   const activePeriods = computed(() => {
     const today = new Date().toISOString().slice(0, 10)
