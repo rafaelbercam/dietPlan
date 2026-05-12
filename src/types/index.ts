@@ -6,6 +6,7 @@ export type FoodCategory =
   | 'drink'
   | 'supplement'
   | 'dessert'
+  | 'dairy'
 
 export interface FoodOption {
   id: string

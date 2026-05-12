@@ -82,7 +82,8 @@ const categoryIcon = (category: FoodCategory) => {
     vegetable: 'eco',
     drink: 'water_drop',
     supplement: 'science',
-    dessert: 'cake'
+    dessert: 'cake',
+    dairy: 'local_cafe'
   }
   return map[category]
 }
@@ -95,7 +96,8 @@ const categoryIconBg = (category: FoodCategory) => {
     vegetable: 'bg-emerald-50',
     drink: 'bg-sky-50',
     supplement: 'bg-violet-50',
-    dessert: 'bg-pink-50'
+    dessert: 'bg-pink-50',
+    dairy: 'bg-blue-50'
   }
   return map[category]
 }
@@ -108,7 +110,8 @@ const categoryIconColor = (category: FoodCategory) => {
     vegetable: 'text-emerald-600',
     drink: 'text-sky-600',
     supplement: 'text-violet-600',
-    dessert: 'text-pink-600'
+    dessert: 'text-pink-600',
+    dairy: 'text-blue-600'
   }
   return map[category]
 }
@@ -121,7 +124,8 @@ const categoryBadge = (category: FoodCategory) => {
     vegetable: 'bg-emerald-100 text-emerald-700',
     drink: 'bg-sky-100 text-sky-700',
     supplement: 'bg-violet-100 text-violet-700',
-    dessert: 'bg-pink-100 text-pink-700'
+    dessert: 'bg-pink-100 text-pink-700',
+    dairy: 'bg-blue-100 text-blue-700'
   }
   return map[category]
 }
@@ -134,7 +138,8 @@ const categoryLabel = (category: FoodCategory) => {
     vegetable: 'Vegetal',
     drink: 'Bebida',
     supplement: 'Suplemento',
-    dessert: 'Sobremesa'
+    dessert: 'Sobremesa',
+    dairy: 'Laticínio'
   }
   return map[category]
 }
