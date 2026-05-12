@@ -240,8 +240,8 @@ export const defaultMeals: Meal[] = [
       },
       {
         id: 'protein-dinner2',
-        name: 'Proteína',
-        amount: '6 colheres de sopa',
+        name: 'Carne magra',
+        amount: '1 porção',
         category: 'meat',
         replaceable: true,
         selectedOption: meats[11],
