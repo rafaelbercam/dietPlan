@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-DietPlan e um app Vue para montar, ajustar e salvar planos alimentares com substituicoes por refeicao. O estado fica no navegador via `localStorage`, com historico de cardapios por periodo e dados da consulta nutricional.
+DietPlan e um app Vue para montar, ajustar e salvar planos alimentares com substituicoes por refeicao. O estado fica no navegador via `localStorage`, com historico de cardapios por periodo e dados da consulta nutricional. Opcionalmente, o plano tambem pode ser espelhado em tempo real para um arquivo `.json` local via File System Access API (ver `useFileSync`).
 
 ## Stack
 
@@ -31,8 +31,8 @@ src/
     layout/ Sidebar.vue
     meal/ MealCard.vue
     period/ PeriodCard.vue, SavePlanModal.vue
-    shared/ SummaryCard.vue
-  composables/ useLocalStorage.ts
+    shared/ SummaryCard.vue, FileSyncControl.vue
+  composables/ useLocalStorage.ts, useFileSync.ts
   data/ dados estaticos de alimentos
   pages/ HomePage.vue, SavedPlansPage.vue
   router/ index.ts
@@ -70,6 +70,8 @@ flowchart TD
   FoodSelector --> FoodOptionList
   MealCard --> Store["mealPlan.store"]
   Store --> LocalStorage["useLocalStorage"]
+  Store --> FileSync["useFileSync"]
+  Sidebar --> FileSyncControl
 ```
 
 ## Skills Disponiveis
@@ -90,6 +92,7 @@ flowchart TD
 | page-saved-plans | Editar pagina de cardapios salvos e grupos por periodo | [.agents/skills/page-saved-plans/SKILL.md](.agents/skills/page-saved-plans/SKILL.md) |
 | meal-plan-store | Alterar estado, actions, migracao ou chaves localStorage | [.agents/skills/meal-plan-store/SKILL.md](.agents/skills/meal-plan-store/SKILL.md) |
 | use-local-storage | Alterar persistencia generica em localStorage | [.agents/skills/use-local-storage/SKILL.md](.agents/skills/use-local-storage/SKILL.md) |
+| use-file-sync | Alterar sincronizacao com arquivo .json local, permissao ou FileSyncControl | [.agents/skills/use-file-sync/SKILL.md](.agents/skills/use-file-sync/SKILL.md) |
 | vue-router | Alterar rotas, base URL ou navegacao | [.agents/skills/vue-router/SKILL.md](.agents/skills/vue-router/SKILL.md) |
 
 ## Restricoes

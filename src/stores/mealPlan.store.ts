@@ -2,6 +2,7 @@ import { computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Meal, FoodOption, MealPlanPeriod, ConsultInfo } from '../types'
 import { useLocalStorage } from '../composables/useLocalStorage'
+import { useFileSync } from '../composables/useFileSync'
 import { getDefaultMealPlan } from '../services/mealPlanService'
 
 const STORAGE_KEY = 'meal-plan-state'
@@ -73,6 +74,12 @@ export const useMealPlanStore = defineStore('meal-plan', () => {
     lastConsultDate: '2026-04-28',
     expirationDays: 40
   })
+
+  const fileSync = useFileSync(() => ({
+    meals: meals.value,
+    savedPeriods: savedPeriods.value,
+    consultInfo: consultInfo.value
+  }))
 
   const consultExpiration = computed(() => {
     const last = new Date(consultInfo.value.lastConsultDate)
@@ -179,6 +186,7 @@ export const useMealPlanStore = defineStore('meal-plan', () => {
     meals,
     savedPeriods,
     consultInfo,
+    fileSync,
     consultExpiration,
     activePeriods,
     inactivePeriods,

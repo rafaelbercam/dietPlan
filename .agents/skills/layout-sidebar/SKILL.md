@@ -20,6 +20,7 @@ description: Documenta Sidebar, navegacao lateral, prop open, emit close, rotas 
 
 - `useRoute` para estado ativo.
 - `useMealPlanStore` para badge de `savedPeriods.length`.
+- `FileSyncControl` no rodape, para conectar/desconectar o arquivo `.json` local (ver [use-file-sync](../use-file-sync/SKILL.md)).
 - Rotas `/` e `/cardapios`.
 
 ## Ao modificar / estender
@@ -27,9 +28,11 @@ description: Documenta Sidebar, navegacao lateral, prop open, emit close, rotas 
 - Ao adicionar uma rota navegavel, atualize `navItems` e [vue-router](../vue-router/SKILL.md).
 - Mantenha fechamento automatico no mobile com `@click="$emit('close')"`.
 - Preserve o badge somente quando houver contagem positiva.
+- `FileSyncControl` so aparece quando `store.fileSync.isSupported` e true; nao remova essa checagem.
 
 ## Referencias
 
 - [src/router/index.ts](../../../src/router/index.ts)
 - [meal-plan-store skill](../meal-plan-store/SKILL.md)
+- [use-file-sync skill](../use-file-sync/SKILL.md)
 - [vue-conventions skill](../vue-conventions/SKILL.md)

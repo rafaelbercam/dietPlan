@@ -33,9 +33,12 @@
       </router-link>
     </nav>
 
-    <div class="border-t border-slate-100 p-4">
-      <p class="text-xs text-slate-400">Plano Alimentar</p>
-      <p class="mt-0.5 text-xs text-slate-500">Rafael Berçam</p>
+    <div class="space-y-3 border-t border-slate-100 p-4">
+      <FileSyncControl />
+      <div>
+        <p class="text-xs text-slate-400">Plano Alimentar</p>
+        <p class="mt-0.5 text-xs text-slate-500">Rafael Berçam</p>
+      </div>
     </div>
   </aside>
 
@@ -50,6 +53,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMealPlanStore } from '../../stores/mealPlan.store'
+import FileSyncControl from '../shared/FileSyncControl.vue'
 
 defineProps<{ open: boolean }>()
 defineEmits<{ (e: 'close'): void }>()

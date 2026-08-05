@@ -16,6 +16,7 @@ description: Documenta useMealPlanStore, estado Pinia, actions, migracao v4 e ch
 | `meals` | `meal-plan-state` / `Meal[]` | Plano atual. |
 | `savedPeriods` | `meal-plan-periods` / `MealPlanPeriod[]` | Snapshots salvos. |
 | `consultInfo` | `meal-plan-consult` / `ConsultInfo` | Dados da consulta. |
+| `fileSync` | retorno de `useFileSync` | Espelha `meals`, `savedPeriods` e `consultInfo` em um arquivo `.json` local opcional. |
 | `CURRENT_VERSION` | `4` | Versao do schema persistido. |
 
 ## Computeds
@@ -50,3 +51,4 @@ description: Documenta useMealPlanStore, estado Pinia, actions, migracao v4 e ch
 - [src/types/index.ts](../../../src/types/index.ts)
 - [src/services/mealPlanService.ts](../../../src/services/mealPlanService.ts)
 - [use-local-storage skill](../use-local-storage/SKILL.md)
+- [use-file-sync skill](../use-file-sync/SKILL.md)
